@@ -18,3 +18,6 @@ mysql:
 
 redis:
 	docker-compose exec redis redis-cli
+
+rabbitmq:
+	docker-compose exec rabbitmq bash

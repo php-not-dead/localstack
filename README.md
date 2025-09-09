@@ -40,3 +40,22 @@ Redis image must be saved in GitHub packages in case of global deprecation.
 5. `make stop`
 6. `make start`
    All historical MySQL images are stored here: https://github.com/php-not-dead/dockerfiles/pkgs/container/redis
+
+## Update RabbitMQ version
+Before updating Production RabbitMQ version, it must be updated and tested locally. Production and local versions and configs must be always the same.
+RabbitMQ image must be saved in GitHub packages in case of global deprecation.
+1. `docker pull rabbitmq:4.1.4` - pull preferred version of RabbitMQ
+2. `docker tag rabbitmq:4.1.4-management ghcr.io/php-not-dead/rabbitmq:4.1.4` - create `ghcr.io/php-not-dead` for new version
+3. `docker push ghcr.io/php-not-dead/rabbitmq:4.1.4`
+4. Replace `docker-compose.yml` line `image: ghcr.io/php-not-dead/rabbitmq:4.1.3` with proper version `image: ghcr.io/php-not-dead/rabbitmq:4.1.4`
+5. Download proper `rabbitmq-delayed-message-exchange` version from https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
+6. Replace `docker-compose.yml` `rabbitmq.volumes` plugin file
+7. Update `./.build/rabbitmq/definitions.json` versions
+8. Ensure, that `.build/rabbitmq/enabled_plugins` match production `> rabbitmq-plugins list` enabled plugins list
+9. `make stop`
+10. `make start`
+
+## Add RabbitMQ vhost
+1. Update `.build/rabbitmq/definitions.json` - add/remove vhost to `vhosts` and `permissions`
+2. `make stop`
+3. `make start`
