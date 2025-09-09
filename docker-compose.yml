@@ -29,9 +29,29 @@ services:
       - redis:/data
     networks:
       - php_not_dead
+
+  rabbitmq:
+    image: ghcr.io/php-not-dead/rabbitmq:4.1.4
+    volumes:
+      - .rabbitmq:/var/lib/rabbitmq
+      - ./.build/rabbitmq/plugins/rabbitmq_delayed_message_exchange-4.1.0.ez:/plugins/rabbitmq_delayed_message_exchange-4.1.0.ez
+      - ./.build/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./.build/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./.build/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - 127.0.0.1:${RABBITMQ_PORT:-5672}:5672
+      - 127.0.0.1:${RABBITMQ_MANAGER_PORT:-15672}:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-guest}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-guest}
+    container_name: ${DOCKER_GROUP:-php_not_dead}_rabbitmq
+    networks:
+      - php_not_dead
+
 volumes:
   mysql:
   redis:
+  rabbitmq:
 
 networks:
   php_not_dead:

@@ -1,3 +1,4 @@
 .env
 .idea
+.rabbitmq
 docker-compose.override.yml
