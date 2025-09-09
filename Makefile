@@ -15,3 +15,6 @@ list-all:
 
 mysql:
 	docker-compose exec mysql bash
+
+redis:
+	docker-compose exec redis redis-cli
