@@ -10,7 +10,8 @@ List of services:
 3. Run `make start`
 
 ## Update MySQL version
-Before updating Production RDS MySQL version, it must be updated and tested locally. Production and local versions and configs must be always the same.
+Before updating Production MySQL version, it must be updated and tested locally.
+Production and local versions and configs must be always the same.
 MySQL image must be saved in GitHub packages in case of global deprecation.
 1. `docker pull mysql:8.4.6` - pull preferred version of MySQL
 2. `docker tag mysql:8.4.6 ghcr.io/php-not-dead/mysql:8.4.6` - create `ghcr.io/php-not-dead` for new version
@@ -27,3 +28,15 @@ All historical MySQL images are stored here: https://github.com/php-not-dead/doc
 3. `make db-restore` - will TRUNCATE all schemas and data
 4. `make start` - will create new list of schemas
 5. All truncate schemas should be filled with data by API migrations and seeds
+
+## Update Redis version
+Before updating Production Redis version, it must be updated and tested locally.
+Production and local versions and configs must be always the same.
+Redis image must be saved in GitHub packages in case of global deprecation.
+1. `docker pull redis:8.2.1` - pull preferred version of Redis
+2. `docker tag redis:8.2.1 ghcr.io/php-not-dead/redis:8.2.1` - create `ghcr.io/php-not-dead` for new version
+3. `docker push ghcr.io/php-not-dead/redis:8.2.1`
+4. Replace `docker-compose.yml` line `image: ghcr.io/php-not-dead/redis:8.2.0` with proper version `image: ghcr.io/php-not-dead/redis:8.2.1`
+5. `make stop`
+6. `make start`
+   All historical MySQL images are stored here: https://github.com/php-not-dead/dockerfiles/pkgs/container/redis
