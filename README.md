@@ -1,8 +1,12 @@
-# LocalStack
-The project is used for development environment as an emulation of K8s services.
+<img src="https://avatars.githubusercontent.com/u/70107733?s=128" width="100" alt="PHP not Dead">
 
-List of services:
-* [Mysql](https://hub.docker.com/_/mysql)
+PHP not Dead Development images
+=============================
+
+The is Docker images list used for development environment:
+* [Mysql](https://hub.docker.com/_/mysql) 8.4.6
+* [Redis](https://hub.docker.com/_/redis) 8.2.1
+* [RabbitMQ](https://hub.docker.com/_/rabbitmq) 4.1.4 with [rabbitmq-delayed-message-exchange](https://github.com/rabbitmq/rabbitmq-delayed-message-exchange)
 
 ## First launch
 1. Rename `.env.example` to `.env`
