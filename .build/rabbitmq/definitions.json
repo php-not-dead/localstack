@@ -16,6 +16,9 @@
         },
         {
             "name": "cto4sale"
+        },
+        {
+            "name": "say_labas"
         }
     ],
     "permissions": [
@@ -29,6 +32,13 @@
         {
             "user": "guest",
             "vhost": "cto4sale",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "guest",
+            "vhost": "say_labas",
             "configure": ".*",
             "write": ".*",
             "read": ".*"
