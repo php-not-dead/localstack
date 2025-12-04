@@ -33,7 +33,7 @@ services:
       - ${DOCKER_GROUP}
 
   rabbitmq:
-    image: ghcr.io/php-not-dead/rabbitmq:4.1.4
+    image: ghcr.io/php-not-dead/rabbitmq:${RABBITMQ_VERSION}
     user: ${UID:-1000}
     volumes:
       - .rabbitmq:/var/lib/rabbitmq

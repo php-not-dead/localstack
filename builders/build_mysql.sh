@@ -29,7 +29,6 @@ DB_USERNAME=$(env DB_USERNAME)
 DB_PASSWORD=$(env DB_PASSWORD)
 DB_SCHEMAS_LIST=()
 
-# Create master user
 SOURCE=''
 
 # Create schemas and grant master user privileges
