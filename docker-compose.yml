@@ -1,37 +1,38 @@
 services:
 
   mysql:
-    image: ghcr.io/php-not-dead/mysql:8.4.6
-    container_name: ${DOCKER_GROUP:-php_not_dead}_mysql
+    image: ghcr.io/php-not-dead/mysql:${MYSQL_VERSION}
+    container_name: ${DOCKER_GROUP}_mysql
+    user: ${UID:-1000}
     restart: always
     volumes:
       - ./.build/mysql/my.cnf:/etc/my.cnf:ro
-      - ./.build/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.build/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mysql:/var/lib/mysql
     ports:
-      - 127.0.0.1:${DB_DOCKER_PORT:-3306}:3306
+      - 127.0.0.1:${DB_DOCKER_PORT}:3306
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-password}
-      MYSQL_DATABASE: ${DB_DATABASE:-php_not_dead}
-      MYSQL_USER: ${DB_USERNAME:-php_not_dead}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     networks:
-      - php_not_dead
+      - ${DOCKER_GROUP}
 
   redis:
-    container_name: "${DOCKER_GROUP:-php_not_dead}_redis"
+    container_name: ${DOCKER_GROUP}_redis
     image: ghcr.io/php-not-dead/redis:8.2.1
     restart: on-failure
-    command: "redis-server --requirepass ${REDIS_PASSWORD:-password}"
+    command: "redis-server --requirepass ${REDIS_PASSWORD}"
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - ${REDIS_PORT:-6379}:6379
     volumes:
       - redis:/data
     networks:
-      - php_not_dead
+      - ${DOCKER_GROUP}
 
   rabbitmq:
-    image: ghcr.io/php-not-dead/rabbitmq:4.1.4
+    image: ghcr.io/php-not-dead/rabbitmq:${RABBITMQ_VERSION}
     volumes:
       - .rabbitmq:/var/lib/rabbitmq
       - ./.build/rabbitmq/plugins/rabbitmq_delayed_message_exchange-4.1.0.ez:/plugins/rabbitmq_delayed_message_exchange-4.1.0.ez
@@ -44,9 +45,9 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER:-guest}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS:-guest}
-    container_name: ${DOCKER_GROUP:-php_not_dead}_rabbitmq
+    container_name: ${DOCKER_GROUP}_rabbitmq
     networks:
-      - php_not_dead
+      - ${DOCKER_GROUP}
 
 volumes:
   mysql:
@@ -55,5 +56,6 @@ volumes:
 
 networks:
   php_not_dead:
-    name: php_not_dead
+    name: ${DOCKER_GROUP}
     driver: bridge
+    external: true
