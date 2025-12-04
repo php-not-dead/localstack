@@ -2,3 +2,5 @@
 .idea
 .rabbitmq
 docker-compose.override.yml
+.build/mysql/init.sql
+.build/rabbitmq/definitions.json
