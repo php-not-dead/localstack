@@ -30,16 +30,16 @@ DB_PASSWORD=$(env DB_PASSWORD)
 DB_SCHEMAS_LIST=()
 
 # Create master user
-SOURCE="CREATE USER '${DB_USERNAME}'@'%' IDENTIFIED WITH mysql_native_password BY '${DB_PASSWORD}';"$'\n'
+SOURCE=''
 
 # Create schemas and grant master user privileges
 env_array DB_SCHEMAS DB_SCHEMAS_LIST
 for DB_SCHEMA in "${DB_SCHEMAS_LIST[@]}"; do
-  SOURCE="$SOURCE"$'\n'$"CREATE DATABASE IF NOT EXISTS ${DB_SCHEMA};"
-  SOURCE="$SOURCE"$'\n'$"GRANT ALL PRIVILEGES ON ${DB_SCHEMA}.* TO '${DB_USERNAME}'@'%';"$'\n'
+  SOURCE="$SOURCE"$"CREATE DATABASE IF NOT EXISTS ${DB_SCHEMA};"$'\n'
+  SOURCE="$SOURCE"$"GRANT ALL PRIVILEGES ON ${DB_SCHEMA}.* TO '${DB_USERNAME}'@'%';"$'\n\n'
 done;
 
 # Flush privileges
-SOURCE="$SOURCE"$'\nFLUSH PRIVILEGES;'
+SOURCE="$SOURCE"$'FLUSH PRIVILEGES;'
 
 echo "$SOURCE" > "$INIT_FILE"

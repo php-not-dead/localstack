@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - ./.build/mysql/my.cnf:/etc/my.cnf:ro
-      - ./.build/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.build/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - mysql:/var/lib/mysql
     ports:
       - 127.0.0.1:${DB_DOCKER_PORT}:3306
@@ -54,6 +54,7 @@ volumes:
   rabbitmq:
 
 networks:
-  ${DOCKER_GROUP}:
+  php_not_dead:
     name: ${DOCKER_GROUP}
     driver: bridge
+    external: true
