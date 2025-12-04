@@ -60,6 +60,6 @@ RabbitMQ image must be saved in GitHub packages in case of global deprecation.
 10. `make start`
 
 ## Add RabbitMQ vhost
-1. Update `.build/rabbitmq/definitions.json` - add/remove vhost to `vhosts` and `permissions`
+1. Update `.env` file `RABBITMQ_VHOSTS` list - add/remove vhosts
 2. `make stop`
 3. `make start`
