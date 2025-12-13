@@ -1,6 +1,6 @@
-<img src="https://avatars.githubusercontent.com/u/70107733?s=128" width="100" alt="PHP not Dead">
+<img src="https://avatars.githubusercontent.com/u/70107733?s=128" width="100" alt="Elephant Studio">
 
-PHP not Dead Development images
+Elephant Studio :: Development images
 =============================
 
 The is Docker images list used for development environment:
