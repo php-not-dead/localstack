@@ -18,8 +18,8 @@ Before updating Production MySQL version, it must be updated and tested locally.
 Production and local versions and configs must be always the same.
 MySQL image must be saved in GitHub packages in case of global deprecation.
 1. `docker pull mysql:8.4.6` - pull preferred version of MySQL
-2. `docker tag mysql:8.4.6 ghcr.io/php-not-dead/mysql:8.4.6` - create `ghcr.io/php-not-dead` for new version
-3. `docker push ghcr.io/php-not-dead/mysql:8.4.6`
+2. `docker tag mysql:8.4.6 ghcr.io/elph-studio/mysql:8.4.6` - create `ghcr.io/elph-studio` for new version
+3. `docker push ghcr.io/elph-studio/mysql:8.4.6`
 4. Update `.env` and `.env.example` variable `MYSQL_VERSION` with proper version
 5. `make stop`
 6. `make db-restore` - will TRUNCATE all schemas and data, rebuild init.sql
@@ -38,9 +38,9 @@ Before updating Production Redis version, it must be updated and tested locally.
 Production and local versions and configs must be always the same.
 Redis image must be saved in GitHub packages in case of global deprecation.
 1. `docker pull redis:8.2.1` - pull preferred version of Redis
-2. `docker tag redis:8.2.1 ghcr.io/php-not-dead/redis:8.2.1` - create `ghcr.io/php-not-dead` for new version
-3. `docker push ghcr.io/php-not-dead/redis:8.2.1`
-4. Replace `docker-compose.yml` line `image: ghcr.io/php-not-dead/redis:8.2.0` with proper version `image: ghcr.io/php-not-dead/redis:8.2.1`
+2. `docker tag redis:8.2.1 ghcr.io/elph-studio/redis:8.2.1` - create `ghcr.io/elph-studio` for new version
+3. `docker push ghcr.io/elph-studio/redis:8.2.1`
+4. Replace `docker-compose.yml` line `image: ghcr.io/elph-studio/redis:8.2.0` with proper version `image: ghcr.io/elph-studio/redis:8.2.1`
 5. `make stop`
 6. `make start`
    All historical MySQL images are stored here: https://github.com/php-not-dead/dockerfiles/pkgs/container/redis
@@ -49,9 +49,9 @@ Redis image must be saved in GitHub packages in case of global deprecation.
 Before updating Production RabbitMQ version, it must be updated and tested locally. Production and local versions and configs must be always the same.
 RabbitMQ image must be saved in GitHub packages in case of global deprecation.
 1. `docker pull rabbitmq:4.1.4` - pull preferred version of RabbitMQ
-2. `docker tag rabbitmq:4.1.4-management ghcr.io/php-not-dead/rabbitmq:4.1.4` - create `ghcr.io/php-not-dead` for new version
-3. `docker push ghcr.io/php-not-dead/rabbitmq:4.1.4`
-4. Replace `docker-compose.yml` line `image: ghcr.io/php-not-dead/rabbitmq:4.1.3` with proper version `image: ghcr.io/php-not-dead/rabbitmq:4.1.4`
+2. `docker tag rabbitmq:4.1.4-management ghcr.io/elph-studio/rabbitmq:4.1.4` - create `ghcr.io/elph-studio` for new version
+3. `docker push ghcr.io/elph-studio/rabbitmq:4.1.4`
+4. Replace `docker-compose.yml` line `image: ghcr.io/elph-studio/rabbitmq:4.1.3` with proper version `image: ghcr.io/elph-studio/rabbitmq:4.1.4`
 5. Download proper `rabbitmq-delayed-message-exchange` version from https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 6. Replace `docker-compose.yml` `rabbitmq.volumes` plugin file
 7. Update `./.build/rabbitmq/definitions.json` versions
